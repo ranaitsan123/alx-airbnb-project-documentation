@@ -1,0 +1,52 @@
+@startuml
+!define RECTANGLE class
+
+title Airbnb Clone Backend — Data Flow Diagram (DFD Level 0)
+
+' Actors
+actor Guest
+actor Host
+actor Admin
+
+' External services
+rectangle "Payment Gateway" as PG
+rectangle "Email Service" as ES
+
+' Processes
+rectangle "User Management" as UM
+rectangle "Property Management" as PM
+rectangle "Booking Management" as BM
+rectangle "Payment Processing" as PAY
+
+' Data Stores
+database "Users" as DS_Users
+database "Properties" as DS_Properties
+database "Bookings" as DS_Bookings
+database "Payments" as DS_Payments
+
+' Data Flow — Guest
+Guest --> UM : Register/Login
+Guest --> PM : Search Properties
+Guest --> BM : Create Booking
+Guest --> PAY : Make Payment
+BM --> DS_Bookings : Store booking info
+UM --> DS_Users : Store user info
+PM --> DS_Properties : Store property info
+PAY --> DS_Payments : Store transaction info
+PAY --> PG : Process Payment
+BM --> ES : Notify booking confirmation
+
+' Data Flow — Host
+Host --> UM : Login/Profile
+Host --> PM : Manage Listings
+PM --> DS_Properties : Store/Update Properties
+Host --> BM : View Bookings
+BM --> ES : Notify booking status
+
+' Data Flow — Admin
+Admin --> UM : Monitor Users
+Admin --> PM : Monitor Listings
+Admin --> BM : Monitor Bookings
+Admin --> PAY : Monitor Payments
+
+@enduml
