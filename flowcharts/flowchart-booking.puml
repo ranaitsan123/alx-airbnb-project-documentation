@@ -1,0 +1,24 @@
+@startuml
+title Airbnb Clone — Booking Creation Flowchart
+
+start
+:Guest selects property and dates;
+:Check property availability;
+if (Property Available?) then (yes)
+    :Guest confirms booking;
+    :Process payment;
+    if (Payment Successful?) then (yes)
+        :Update booking status to Confirmed;
+        :Store booking info in database;
+        :Send notifications to Guest and Host;
+        stop
+    else (no)
+        :Notify Guest about payment failure;
+        stop
+    endif
+else (no)
+    :Notify Guest property unavailable;
+    stop
+endif
+
+@enduml

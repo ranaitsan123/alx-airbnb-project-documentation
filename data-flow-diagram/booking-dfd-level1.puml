@@ -1,0 +1,31 @@
+@startuml
+!define RECTANGLE class
+
+title Airbnb Clone Backend — Booking Management DFD Level 1
+
+actor Guest
+actor Host
+
+rectangle "Booking Management" as BM {
+    rectangle "Create Booking" as CB
+    rectangle "Validate Availability" as VA
+    rectangle "Update Booking Status" as UBS
+    rectangle "Notify Users" as NU
+    rectangle "Store Booking Info" as SBI
+}
+
+database "Bookings" as DS_Bookings
+rectangle "Email / Notification Service" as ES
+
+' Data Flow — Guest
+Guest --> CB : Select property & dates
+CB --> VA : Check property availability
+VA --> UBS : Confirm or Reject booking
+UBS --> SBI : Save booking status
+SBI --> DS_Bookings : Store booking details
+UBS --> NU : Trigger notifications
+NU --> ES : Send emails / in-app notifications
+NU --> Guest : Receive confirmation
+NU --> Host : Notify host
+
+@enduml
