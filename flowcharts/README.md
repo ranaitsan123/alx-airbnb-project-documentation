@@ -18,13 +18,13 @@ It shows how a guest selects a property, checks availability, processes payment,
 ---
 
 ## 🖼️ Diagram
-![Booking Creation Flowchart](flowchart-booking.png)
+![Booking Creation Flowchart](data-flow-diagram.png)
 
 ---
 
 ## 📁 Directory Structure
 ```
 flowcharts/
-├── flowchart-booking.png
+├── data-flow-diagram.png
 └── flowchart-booking.puml
 ```
